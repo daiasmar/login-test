@@ -2,8 +2,11 @@
 
 import { useState } from "react";
 import axios, { AxiosError } from "axios";
+import { useRouter } from 'next/navigation'
 
 export default function Login() {
+
+    const router = useRouter();
 
     const [ credentials, setCredentials ] = useState({
         username: "",
@@ -27,7 +30,10 @@ export default function Login() {
                     },
                     withCredentials: true
                 });
-                console.log(res.data)
+
+                if(res.status == 200) {
+                    router.push('/');
+                }
 
             } catch(exc: unknown) {
     
